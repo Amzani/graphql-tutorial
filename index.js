@@ -10,8 +10,10 @@ type Video {
     duration: Int,
     watched: Boolean
 }
+
 type Query {
     video: Video
+    videos: [Video]
 }
 
 type Schema {
@@ -20,18 +22,35 @@ type Schema {
 `);
 
 
+const VideoA = {
+    id: 'a',
+    title : 'Create a GraphQL Schema',
+    duration: 120,
+    watched: true
+};
+
+const VideoB = {
+    id: 'a',
+    title : 'EmbedJS CLI',
+    duration: 260,
+    watched: false
+};
+
+const videos = [VideoA, VideoB];
+
 const resolvers = {
     video: () => ({
             id: () => '1',
             title: () => 'bar',
             duration: () => 180,
             watched: () => true,
-    })
+    }),
+    videos: () => videos,
 };
 
 const query = `
 query myFirstQuery {
-    video {
+    videos {
         id
         title
         duration
